@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'escs-landing-dev',
+      name: 'tweeter-dev',
       script: 'node_modules/.bin/next',
       args: 'dev -p 4080',
       time: true,
