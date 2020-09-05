@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@prefresh/next": "~0.3.0",
+    "firebase": "^7.19.1",
     "next": "~9.5.3",
     "preact": "~10.4.4",
     "preact-render-to-string": "~5.1.9",
