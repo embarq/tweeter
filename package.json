@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "pm2 start ecosystem.config.js",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "eslint . --ext js,jsx,ts,tsx --max-warnings=0"
   },
   "dependencies": {
     "@prefresh/next": "~0.3.0",
@@ -16,6 +17,11 @@
     "react-ssr-prepass": "npm:preact-ssr-prepass@~1.0.1"
   },
   "devDependencies": {
+    "eslint": "^7.8.1",
+    "eslint-config-preact": "^1.1.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-react-hooks": "^4.1.0",
     "pm2": "^4.4.1",
     "postcss-flexbugs-fixes": "4.2.1",
     "postcss-preset-env": "^6.7.0",
