@@ -1,11 +1,13 @@
-import { useState, useEffect, createContext, useContext } from 'react'
-import fire from './firebase'
+// @ts-check
+import { useEffect } from "react"
+import { useSetRecoilState } from "recoil"
+import * as state from '../constants/state'
+import fire from '../core/firebase'
 
-export const UserContext = createContext()
-
-export default function UserContextComp({ children }) {
-  const [user, setUser] = useState(null)
-  const [loadingUser, setLoadingUser] = useState(true)
+export default function AuthContainer({children}) {
+  const setUserId = useSetRecoilState(state.userId)
+  const setUserProfile = useSetRecoilState(state.userProfile)
+  const setUserLoading = useSetRecoilState(state.userLoading)
 
   useEffect(() => {
     // Listen authenticated user
@@ -18,21 +20,22 @@ export default function UserContextComp({ children }) {
             .where('id', '==', uid)
             .get()
 
-          let profile = snap.docs[0]
+          let profile = snap.docs[0].data()
 
           if (profile == null) {
             throw new Error('User profile not found')
           }
 
-          setUser({ uid, profile })
+          setUserProfile(profile)
+          setUserId(uid)
         } else {
-          setUser(null)
+          setUserId(null)
         }
       } catch (error) {
         // Most probably a connection error. Handle appropriately.
         console.error(error);
       } finally {
-        setLoadingUser(false)
+        setUserLoading(false)
       }
     })
 
@@ -40,12 +43,5 @@ export default function UserContextComp({ children }) {
     return () => unsubscriber()
   }, [])
 
-  return (
-    <UserContext.Provider value={{ user, setUser, loadingUser }}>
-      {children}
-    </UserContext.Provider>
-  )
+  return <>{children}</>
 }
-
-// Custom hook that shorhands the context!
-export const useUser = () => useContext(UserContext)

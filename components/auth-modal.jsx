@@ -1,18 +1,21 @@
 import { useState, useEffect } from 'react'
-import { useUser } from '../core/user.context'
 import Portal from '../components/portal'
 import Modal from '../components/modal'
-import Auth from '../components/auth'
+import Auth from '../components/auth-page'
+import { useRecoilValue } from 'recoil'
+import * as state from '../constants/state'
 
 export default function AuthModal() {
   const [display, setDisplay] = useState(false)
-  const {user, loadingUser} = useUser()
+  const userId = useRecoilValue(state.userId)
+  const userLoading = useRecoilValue(state.userLoading)
+  const isAuthenticated = userId != null && !userLoading
 
   useEffect(() => {
-    if (!loadingUser && user == null) {
+    if (!isAuthenticated) {
       setDisplay(true)
     }
-  }, [user, display])
+  }, [isAuthenticated])
 
   if (display) {
     return (

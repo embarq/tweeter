@@ -1,6 +1,6 @@
 import { RecoilRoot } from 'recoil'
 import { globalPortalHost } from '../constants/ui'
-import UserContextComp from '../core/user.context'
+import AppContainer from '../containers'
 import AuthModal from '../components/auth-modal'
 
 import '../styles/index.css'
@@ -8,11 +8,10 @@ import '../styles/index.css'
 function MyApp({ Component, pageProps }) {
   return (
     <RecoilRoot>
-      <UserContextComp>
+      <AppContainer>
         <Component {...pageProps} />
-        <div id={globalPortalHost}></div>
-        <AuthModal />
-      </UserContextComp>
+      </AppContainer>
+      <div id={globalPortalHost}></div>
     </RecoilRoot>
   )
 }
