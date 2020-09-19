@@ -26,7 +26,7 @@ export default function Header() {
   ));
 
   return (
-    <div className="w-full bg-white">
+    <header className="w-full bg-white">
       <div className="container mx-auto flex items-center justify-between">
         <strong className="text-indigo-500">Tweeter</strong>
         <nav className="flex list-none pt-2">
@@ -40,6 +40,6 @@ export default function Header() {
       {showNavPopover &&
         <HeaderNavPopover onDismiss={() => setShowNavPopover(false)} />
       }
-    </div>
+    </header>
   )
 }

@@ -9,6 +9,9 @@ module.exports = {
         'lg': '12px',
         'xl': '16px'
       },
+      shadow: {
+        'sm': '0px 2px 4px rgba(0, 0, 0, 0.05)'
+      }
     },
   },
   variants: {},

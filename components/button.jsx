@@ -7,7 +7,7 @@ const clearStyles = 'text-gray-600 hover:text-gray-700 hover:bg-gray-100 focus:s
 export default function Button({className, children, kind, loading, ...props}) {
   const buttonStyle = kind === 'clear' ? clearStyles : defaultStyles
   return (
-    <button {...props} className={classNames(buttonStyle, className)}>
+    <button {...props} className={classNames(buttonStyle, className)} disabled={loading}>
       {loading && <div className="w-4 h-4 mr-2"><Loader /></div>}
       {children}
     </button>

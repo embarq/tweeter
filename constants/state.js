@@ -19,3 +19,8 @@ export const isAuthenticated = selector({
     return user && !loading
   }
 })
+
+export const currentUser = selector({
+  key: 'currentUser',
+  get: ({ get }) => get(userId)
+})

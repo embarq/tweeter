@@ -12,7 +12,7 @@
 }
 
 .card {
-  @apply rounded-lg bg-white shadow-md p-4;
+  @apply rounded-lg bg-white shadow-sm p-4;
 }
 
 .card-header {
