@@ -4,7 +4,7 @@ import Button from './button'
 import * as icons from '../util/icons'
 
 export default function Post({ className, data }) {
-  const { author } = usePostDetails(data)
+  const { author, attachments } = usePostDetails(data)
   const createdAt = new Date(data.created_at).toLocaleString()
 
   const avatar = author && author.avatar
@@ -25,6 +25,16 @@ export default function Post({ className, data }) {
       </header>
       <main className="pb-2">
         {data.content}
+        <div className="mt-2">
+        {Array.isArray(attachments) && <ul className="list-none flex justify-center rounded-md">{
+          attachments.map(({ link, id }) =>
+            <li key={id}>
+              <img src={link} alt="Attachment" style={{maxHeight: '200px'}}
+                className="" />
+            </li>
+          )
+        }</ul>}
+        </div>
         <div className="text-right mt-2 text-xs text-gray-500">
           <span className="mr-3">0 Comments</span><span className="mr-3">0 Retweets</span><span>0 Saved</span>
         </div>

@@ -32,6 +32,13 @@ export const usePostAuthor = uid => {
 export const usePostDetails = (post) => {
   // TODO: attachments, stats(likes, retweets, replies, saves/bookmarks)
   const author = usePostAuthor(post.author)
+  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
+  const attachments = Array.isArray(post.attachments) && post.attachments.map(entryId => {
+    return {
+      id: entryId,
+      link: `https://res.cloudinary.com/${cloudName}/image/upload/${entryId}`
+    }
+  })
 
-  return { author }
+  return { author, attachments }
 }
