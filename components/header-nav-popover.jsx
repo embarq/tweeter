@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import Link from 'next/link'
+import MePageNav from './me-page-nav'
 import fire from '../core/firebase'
 import Button from './button'
 
@@ -27,13 +28,7 @@ export default function HeaderNavPopover({ onDismiss }) {
       id="header-nav-popover">
       <ul className="list-none">
         <li>
-          <Link href="/me">
-            <a className="text-gray-700">
-              <Button kind="clear" className="text-left w-full">
-                My Profile
-              </Button>
-            </a>
-          </Link>
+          <MePageNav />
         </li>
         <hr/>
         <li>

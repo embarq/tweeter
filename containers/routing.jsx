@@ -8,7 +8,10 @@ const memberRoutes = [
   '/home',
   '/me',
   '/bookmarks',
-  '/messages'
+  '/messages',
+  '/me/profile',
+  '/me/account',
+  '/me/settings',
 ]
 
 export default function RouingContainer({ children }) {
