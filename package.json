@@ -10,6 +10,7 @@
   "dependencies": {
     "@prefresh/next": "~0.3.0",
     "classnames": "^2.2.6",
+    "cloudinary": "^1.23.0",
     "firebase": "^7.19.1",
     "next": "~9.5.3",
     "react": "~16.13.1",
