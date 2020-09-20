@@ -23,6 +23,14 @@
   @apply w-full py-2 px-4 text-gray-700 leading-tight rounded border-2 border-transparent appearance-none;
 }
 
+.btn {
+  @apply flex items-center shadow bg-indigo-600 text-white py-2 px-4 rounded
+}
+
+.btn-clear {
+  @apply flex items-center py-2 px-4 rounded text-gray-600
+}
+
 /* Start purging... */
 @tailwind utilities;
 /* Stop purging. */
