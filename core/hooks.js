@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import firebase from './firebase'
 import { getProfile } from './auth'
+import { getCloudinaryUrl } from '../util/misc'
 
 /**
  * @example
@@ -36,7 +37,7 @@ export const usePostDetails = (post) => {
   const attachments = Array.isArray(post.attachments) && post.attachments.map(entryId => {
     return {
       id: entryId,
-      link: `https://res.cloudinary.com/${cloudName}/image/upload/${entryId}`
+      link: getCloudinaryUrl(entryId)
     }
   })
 

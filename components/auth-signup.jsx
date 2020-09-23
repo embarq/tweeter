@@ -18,7 +18,6 @@ export default function AuthSignup(props) {
       let payload = { ...formValue }
       delete payload.confirmPassword
       let res = await signupWithCredentials(payload)
-      console.log('signupWithCredentials', res);
       setState({
         ...state,
         loading: false,

@@ -1,4 +1,3 @@
-import { Children } from 'react'
 import MePageNav from './me-page-nav'
 import { myPagesLinks } from '../constants/ui'
 
@@ -12,7 +11,7 @@ export default function MePageLayout({ children }) {
       </div>
       <div className="w-3/4">
         <div className="card h-full">
-          {Children.only(children)}
+          {children}
         </div>
       </div>
     </div>

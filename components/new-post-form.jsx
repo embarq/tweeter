@@ -25,7 +25,7 @@ export default function NewPostForm({ className }) {
     setState({ ...state, loading: true, error: null })
     const payload = {
       author: uid,
-      limit: 'everyone',
+      limit: 'everyone',  // TODO: add option to limit post to be seen by the people you follow
       content: postContent,
       created_at: Date.now(),
     }
