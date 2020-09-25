@@ -3,21 +3,29 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "pm2 start ecosystem.config.js",
+    "start:dev": "next dev -p 4080",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint . --ext js,jsx,ts,tsx --max-warnings=0"
+    "lint": "eslint . --ext js,jsx,ts,tsx --max-warnings=0",
+    "analyze": "cross-env ANALYZE=true yarn build"
   },
   "dependencies": {
     "@prefresh/next": "~0.3.0",
     "classnames": "^2.2.6",
     "cloudinary": "^1.23.0",
     "firebase": "^7.19.1",
+    "firebase-admin": "^9.2.0",
     "next": "~9.5.3",
     "react": "~16.13.1",
+    "react-cookie": "^4.0.3",
     "react-dom": "~16.13.1",
-    "recoil": "^0.0.10"
+    "recoil": "^0.0.10",
+    "swr": "^0.3.3",
+    "universal-cookie": "^4.0.4"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^9.5.3",
+    "cross-env": "^7.0.2",
     "eslint": "^7.8.1",
     "eslint-config-preact": "^1.1.1",
     "eslint-plugin-import": "^2.22.0",
