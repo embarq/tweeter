@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import classNames from 'classnames'
-import fire from '../core/firebase'
+import { createPost } from '../core/posts'
 import Button from './button'
 import PostReplyOptionInput from './post-reply-option-input'
 import { useCurrentUserId } from '../core/hooks'
@@ -36,7 +36,7 @@ export default function NewPostForm({ className }) {
       )
       .then(responses => {
         payload.attachments = responses.map(res => res.public_id)
-        return fire.firestore().collection('posts').add(payload)
+        return createPost(payload)
       })
       .then(() => {
         setAttachments([])

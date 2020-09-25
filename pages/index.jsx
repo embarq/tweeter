@@ -3,15 +3,19 @@ import Layout from '../components/layout'
 import NewPostForm from '../components/new-post-form'
 import Trends from '../components/trends'
 import PostsList from '../components/posts-list'
+import Cookies from 'universal-cookie'
+import * as admin from 'firebase-admin'
+import { verifyIdToken } from '../core/auth-server'
+import * as cookiesKey from '../constants/cookies'
 
-export default function IndexPage() {
+export default function IndexPage({ posts }) {
   const currentUser = useCurrentUserId()
   return (
     <Layout>
       <div className="container mx-auto pt-6 flex">
         <div className="w-2/3 px-4">
           <NewPostForm />
-          <PostsList author={currentUser} className="mt-6" />
+          <PostsList posts={posts} author={currentUser} className="mt-6" />
         </div>
         <div className="w-1/3 px-4">
           <Trends />
@@ -19,4 +23,29 @@ export default function IndexPage() {
       </div>
     </Layout>
   )
+}
+
+export async function getServerSideProps(ctx) {
+  try {
+    const cookies = new Cookies(ctx.req.headers.cookie)
+    let token = await verifyIdToken(cookies.get(cookiesKey.AuthKey))
+    let posts = await admin.firestore()
+      .collection('posts')
+      .where('author', '==', token.uid)
+      .get()
+      .then(snap => snap.docs.map(doc => ({ ...doc.data(), id: doc.id })))
+
+    return {
+      props: {
+        posts
+      }
+    }
+  } catch(err) {
+    console.error(err)
+    return {
+      props: {
+        posts: []
+      }
+    }
+  }
 }

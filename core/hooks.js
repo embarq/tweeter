@@ -1,7 +1,7 @@
 // @ts-check
 
 import { useEffect, useState } from 'react'
-import firebase from './firebase'
+import * as firebase from 'firebase/app'
 import { getProfile } from './auth'
 import { getCloudinaryUrl } from '../util/misc'
 

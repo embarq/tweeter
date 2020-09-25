@@ -14,9 +14,11 @@ export default class Portal extends Component {
     this.host.id = this.props.id
 
     const globalPortal = document.getElementById(globalPortalHost)
-    globalPortal.appendChild(this.host)
 
-    this.setState({ mounted: true })
+    if (globalPortal) {
+      globalPortal.appendChild(this.host)
+      this.setState({ mounted: true })
+    }
   }
 
   componentWillUnmount() {

@@ -1,5 +1,5 @@
 // @ts-check
-import firebase from 'firebase'
+import * as firebase from 'firebase/app'
 
 export const signupWithCredentials = (payload) => {
   return firebase.auth()
@@ -15,6 +15,10 @@ export const signupWithCredentials = (payload) => {
       delete userProfile.password
       return firebase.firestore().collection('users').add(userProfile)
     })
+}
+
+export const login = ({ email, password }) => {
+  return firebase.auth().signInWithEmailAndPassword(email, password)
 }
 
 export const getCurrentUid = () => {

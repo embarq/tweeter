@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import fire from '../core/firebase'
+import { login } from '../core/auth'
 import StyledInput from './styled-input'
 import ManagedForm from './form'
 import FormField from './form-field'
@@ -15,7 +15,7 @@ export default function AuthLogin(props) {
     })
 
     try {
-      let res = await fire.auth().signInWithEmailAndPassword(formValue.email, formValue.password)
+      let res = await login(formValue)
       console.log('signInWithEmailAndPassword', res);
       setState({
         ...state,
