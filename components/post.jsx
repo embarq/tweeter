@@ -8,7 +8,7 @@ export default function Post({ className, data }) {
   const createdAt = new Date(data.created_at).toLocaleString()
 
   const avatar = author && author.avatar
-    ? <img src={author.avatar} alt="Avatar" className="w-10 h-10 rounded-lg" />
+    ? <img src={author.avatar.url} alt="Avatar" className="w-10 h-10 rounded-lg" />
     : <div className="w-10 h-10 rounded-lg text-gray-400">{icons.smile}</div>
 
   return (
