@@ -10,7 +10,6 @@
     "analyze": "cross-env ANALYZE=true yarn build"
   },
   "dependencies": {
-    "@prefresh/next": "~0.3.0",
     "classnames": "^2.2.6",
     "cloudinary": "^1.23.0",
     "firebase": "^7.19.1",
@@ -27,7 +26,6 @@
     "@next/bundle-analyzer": "^9.5.3",
     "cross-env": "^7.0.2",
     "eslint": "^7.8.1",
-    "eslint-config-preact": "^1.1.1",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-react": "^7.20.6",
     "eslint-plugin-react-hooks": "^4.1.0",
