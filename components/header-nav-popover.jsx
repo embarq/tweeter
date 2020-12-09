@@ -1,11 +1,14 @@
 import { useEffect } from 'react'
-import Link from 'next/link'
 import MePageNav from './me-page-nav'
-import fire from '../core/firebase'
+import * as firebase from 'firebase/app'
 import Button from './button'
 
 export default function HeaderNavPopover({ onDismiss }) {
-  const handleLogout = () => fire.auth().signOut().then(() => onDismiss())
+  const handleLogout = () => {
+    firebase.auth().signOut()
+      .then(() => onDismiss())
+      .catch(() => onDismiss())
+  }
 
   useEffect(() => {
     if (document == null) {
