@@ -24,9 +24,3 @@ export const watchUserPosts = (uid, onNext, onError) => {
     error: onError
   }))
 }
-
-export const getOwnPosts = (onNext, onError) => {
-  const uid = firebase.auth().currentUser.uid
-  return getPosts(uid, onNext, onError)
-}
-
