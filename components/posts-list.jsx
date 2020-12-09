@@ -6,6 +6,7 @@ import Post from './post'
 
 export default function PostsList({ className, author, posts: _posts = [] }) {
   const [posts, setPosts] = useState(_posts)
+  // TODO: display loading strip on top or bottom of the list
   const [loadingState, setLoadingState] = useLoading()
 
   useEffect(() => {
