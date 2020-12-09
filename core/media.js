@@ -35,8 +35,6 @@ export const cloudinaryUpload = async (file) => {
 
   body.append('signature', signatureRes.sig)
 
-  console.log('upload_body', Object.fromEntries(body.entries()));
-
   return fetch(url, { body, method: 'POST' })
     .then(res => {
       let payload = res.json()

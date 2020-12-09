@@ -17,15 +17,13 @@ export default function ProfilePictureUpload({ data = null, onChange = () => {} 
   }
 
   useEffect(() => {
-    if (data != null && data.url) {
-      setAvatar(data)
-    }
+    setAvatar(data)
   }, [data])
 
   if (avatar) {
-    const variants = ['w-40', 'w-24', 'w-10'].map(width => (
-      <img src={avatar.url} alt="Avatar" key={width}
-        className={classNames('block mr-4 rounded-md shadow', width)} />
+    const variants = [ '24', '10' ].map(size => (
+      <img src={avatar.url} alt="Avatar" key={size}
+        className={`block bg-gray-200 text-gray-200 mr-4 rounded-md shadow w-${size} h-${size}`} />
     ))
     return (
       <div className="flex items-end">

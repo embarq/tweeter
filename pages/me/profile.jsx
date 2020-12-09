@@ -14,11 +14,17 @@ export default function MeProfilePage() {
   const [state, setState] = useState({ loading: false, success: false, error: null })
   const initialProfileFormValue = useRef(
     getProfile(getCurrentUid()).then(profile => {
+      let avatar = null
+
+      if (profile.avatar != null) {
+        avatar = {
+          id: profile.avatar,
+          url: getCloudinaryUrl(profile.avatar),
+        }
+      }
+
       return {
-        avatar: {
-          id: profile.avatar != null ? profile.avatar : null,
-          url: profile.avatar != null ? getCloudinaryUrl(profile.avatar) : null,
-        },
+        avatar,
         fullname: profile.fullname,
         username: profile.username,
         bio: profile.bio || '',
@@ -36,9 +42,11 @@ export default function MeProfilePage() {
     try {
       let payload = { ...formValue }
 
-      if ((await initialProfileFormValue.current).avatar.url !== payload.avatar.url) {
+      if (payload.avatar?.file != null) {
         let avatarRes = await cloudinaryUpload(payload.avatar.file)
         payload.avatar = avatarRes.public_id
+      } else {
+        delete payload.avatar;
       }
 
       await updateProfile(getCurrentUid(), payload)
@@ -57,9 +65,23 @@ export default function MeProfilePage() {
     }
   })
 
-  const handleAvatarChange = (next) => {
+  /**
+   * @param {(payload: object) => any} _updateFieldState
+   */
+  const handleAvatarReset = (_updateFieldState) => {
+    return () => _updateFieldState({
+      id: 'avatar',
+      value: null
+    })
+  }
+
+  /**
+   * Handle `ProfilePictureUpload` change as `ManagedForm` field change
+   * @param {(payload: object) => any} _updateFieldState
+   */
+  const handleAvatarChange = (_updateFieldState) => {
     return event => {
-      next({
+      _updateFieldState({
         id: 'avatar',
         value: {
           id: null,
@@ -85,7 +107,7 @@ export default function MeProfilePage() {
           <FormField>
             <label className="flex justify-between mb-2 items-center">
               <span className="text-sm text-gray-500">Profile picture</span>
-              <Button kind="clear" className="py-1 px-2 text-sm text-gray-500">&times; Reset</Button>
+              <Button onClick={handleAvatarReset(updateFieldState)} type="button" kind="clear" className="py-1 px-2 text-sm text-gray-500">&times; Reset</Button>
             </label>
             <ProfilePictureUpload
               id="avatar"
