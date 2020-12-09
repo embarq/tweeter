@@ -49,6 +49,15 @@ export default function ManagedForm({
     onSubmit(value, event)
   }
 
+  if (typeof children !== 'function') {
+    console.warn('Component ManagedForm expects function as the only child.')
+    return (
+      <form onSubmit={handleSubmit} className={className}>
+        {children}
+      </form>
+    )
+  }
+
   return (
     <form onSubmit={handleSubmit} className={className}>
       {children({ value, controls }, updateFieldState)}
