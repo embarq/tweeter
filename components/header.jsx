@@ -26,7 +26,7 @@ export default function Header() {
   ));
 
   return (
-    <header className="w-full bg-white">
+    <header className="fixed top-0 w-full bg-white shadow-sm">
       <div className="container mx-auto flex items-center justify-between">
         <strong className="text-indigo-500">Tweeter</strong>
         <nav className="flex list-none pt-2">
