@@ -17,6 +17,8 @@ export default function AuthContainer({children}) {
       if (user) {
         let token = await user.getIdToken()
         setCookie(cookiesKeys.AuthKey, token)
+      } else {
+        setCookie(cookiesKeys.AuthKey, '')
       }
     })
     // Listen authenticated user
