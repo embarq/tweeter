@@ -1,13 +1,14 @@
-import { useCallback, useEffect, useState } from 'react'
 import { signupWithCredentials } from '../core/auth'
+import { useLoading } from '../core/hooks'
 import StyledInput from './styled-input'
 import ManagedForm from './form'
 import FormField from './form-field'
 import Button from './button'
 
 export default function AuthSignup(props) {
-  const [state, setState] = useState({ loading: false, success: false, error: null })
-  const handleSubmit = useCallback(async (formValue) => {
+  const [state, setState] = useLoading()
+
+  const handleSubmit = async function(formValue) {
     setState({
       ...state,
       loading: true,
@@ -17,27 +18,24 @@ export default function AuthSignup(props) {
     try {
       let payload = { ...formValue }
       delete payload.confirmPassword
-      let res = await signupWithCredentials(payload)
+
+      await signupWithCredentials(payload)
+
       setState({
         ...state,
         loading: false,
         success: true,
       })
     } catch(err) {
-      console.log(err);
+      // TODO: display an error message alert in a form
+      console.error(err)
       setState({
         ...state,
         loading: false,
         error: err.message,
       })
     }
-  })
-
-  useEffect(() => {
-    if (state.success) {
-      props.onSignupSuccess()
-    }
-  }, [state.success])
+  }
 
   return (
     <ManagedForm onSubmit={handleSubmit} className="w-full max-w-sm md:ml-10">

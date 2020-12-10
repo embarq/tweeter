@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { login } from '../core/auth'
 import StyledInput from './styled-input'
 import ManagedForm from './form'
@@ -15,14 +15,14 @@ export default function AuthLogin(props) {
     })
 
     try {
-      let res = await login(formValue)
-      console.log('signInWithEmailAndPassword', res);
+      await login(formValue)
       setState({
         ...state,
         loading: false,
         success: true,
       })
     } catch(err) {
+      // TODO: display an error message alert in a form
       console.log(err);
       setState({
         ...state,
@@ -31,12 +31,6 @@ export default function AuthLogin(props) {
       })
     }
   })
-
-  useEffect(() => {
-    if (state.success) {
-      props.onLoginSuccess()
-    }
-  }, [state.success])
 
   return (
     <ManagedForm onSubmit={handleSubmit} className="w-full max-w-sm md:ml-10">
