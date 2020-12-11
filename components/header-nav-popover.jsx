@@ -40,7 +40,7 @@ export default function HeaderNavPopover({ onDismiss, className = '' }) {
           <Button
             onClick={handleLogout}
             kind="clear"
-            className="text-left w-full text-red-500 hover:text-red-400">
+            className="justify-start w-full text-red-500 hover:text-red-400">
             Logout
           </Button>
         </li>

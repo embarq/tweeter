@@ -12,7 +12,7 @@ export default function MePageNav({ }) {
       <li key={link}>
         <Link href={link}>
           <a>
-            <Button kind={link === asPath ? 'default' : 'clear'} className="w-full">{text}</Button>
+            <Button kind={link === asPath ? 'primary' : 'clear'} className="w-full justify-start">{text}</Button>
           </a>
         </Link>
       </li>
