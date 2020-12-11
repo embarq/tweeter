@@ -22,6 +22,11 @@ export default function NewPostForm({ className }) {
   const handleSubmit = (event) => {
     event.preventDefault()
     event.persist()
+
+    if (postContent.trim().length < 1) {
+      // TODO: validate / handle invalid case. don't proceed with form submition handling
+    }
+
     setState({ ...state, loading: true, error: null })
     const payload = {
       author: uid,
@@ -94,12 +99,12 @@ export default function NewPostForm({ className }) {
             ref={fileInputRef} onChange={handleFileInputChange} />
           <Button
             onClick={handleAttachmentBtnClick}
-            type="button" kind="clear" className="text-purple-600">
+            type="button" kind="clear" className="py-1 text-purple-600">
             {image}
           </Button>
-          <Button type="submit" loading={state.loading}>Tweet</Button>
+          <Button type="submit" loading={state.loading} className="w-20 py-1 text-xs">Tweet</Button>
         </footer>
-        {attachments && (
+        {attachments.length > 0 && (
           <ul className="list-none flex mt-4">{
           attachments.map(({ localUrl }) => (
             <li key={localUrl} className="mr-3 relative pt-2 pr-1">
