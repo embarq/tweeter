@@ -1,10 +1,12 @@
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 import { useState } from 'react'
 import HeaderNavItem from './header-nav-item'
 import Button from './button'
 import * as state from '../constants/state'
 import HeaderNavPopover from './header-nav-popover'
 import { useRecoilValue } from 'recoil'
+import { logo as logoIcon } from '../util/icons'
 
 const LINKS = [
   { link: '/', text: 'Home' },
@@ -28,7 +30,12 @@ export default function Header() {
   return (
     <header className="fixed top-0 w-full bg-white shadow-sm">
       <div className="container relative mx-auto flex items-center justify-between">
-        <strong className="text-indigo-500">Tweeter</strong>
+        <Link href="/">
+          <a className="flex align-center text-indigo-500">
+            {logoIcon}
+            <span className="ml-3 pt-1 font-bold">Tweeter</span>
+          </a>
+        </Link>
         <nav className="flex list-none pt-2">
           {links}
         </nav>
