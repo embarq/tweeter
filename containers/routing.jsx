@@ -19,13 +19,13 @@ export default function RouingContainer({ children }) {
   const userLoading = useRecoilValue(state.userLoading)
   const user = useRecoilValue(state.userId)
 
-  if (user == null && userLoading) {
-    return null;
+  if (!userLoading && user == null) {
+    return <AuthModal />
   }
 
   if (memberRoutes.includes(pathname) && !userLoading && user != null) {
     return <>{children}</>
   }
 
-  return <AuthModal />
+  return null
 }
