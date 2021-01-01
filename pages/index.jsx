@@ -28,7 +28,17 @@ export default function IndexPage({ posts }) {
 export async function getServerSideProps(ctx) {
   try {
     const cookies = new Cookies(ctx.req.headers.cookie)
-    let token = await verifyIdToken(cookies.get(cookiesKey.AuthKey))
+    const tokenPayload = cookies.get(cookiesKey.AuthKey)
+
+    if ((tokenPayload || '').trim().length === 0) {
+      return {
+        props: {
+          posts: []
+        }
+      }
+    }
+
+    let token = await verifyIdToken(tokenPayload)
     let posts = await admin.firestore()
       .collection('posts')
       .where('author', '==', token.uid)
