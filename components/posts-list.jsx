@@ -25,7 +25,7 @@ export default function PostsList({ className, author, posts: _posts = [] }) {
 
   return (
     <ul className={classNames('list-none', className)}>{
-      _posts.map(post => (
+      posts.map(post => (
         <li key={post.id} className="mb-6">
           <Post data={post} />
         </li>
