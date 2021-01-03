@@ -7,6 +7,7 @@ import Cookies from 'universal-cookie'
 import * as admin from 'firebase-admin'
 import { verifyIdToken } from '../core/auth-server'
 import * as cookiesKey from '../constants/cookies'
+import UserPosts from '../containers/user-posts'
 
 export default function IndexPage({ posts }) {
   const currentUser = useCurrentUserId()
@@ -15,7 +16,11 @@ export default function IndexPage({ posts }) {
       <div className="container mx-auto md:pt-6 md:flex">
         <div className="w-full md:w-2/3 px-4">
           <NewPostForm />
-          <PostsList posts={posts} author={currentUser} className="mt-6" />
+          <UserPosts author={currentUser} posts={posts}>{
+            ({ posts }) => (
+              <PostsList posts={posts} author={currentUser} className="mt-6" />
+            )
+          }</UserPosts>
         </div>
         <div className="hidden md:block w-1/3 px-4">
           <Trends />
