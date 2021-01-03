@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { useState } from 'react'
-import { useRecoilValue } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 import classNames from 'classnames'
 import HeaderNavItem from './header-nav-item'
 import Button from './button'
@@ -19,6 +19,7 @@ const LINKS = [
 
 export default function Header() {
   const [showNavPopover, setShowNavPopover] = useState(false)
+  const setDisplayAuthModal = useSetRecoilState(state.displayAuthModal)
   const { pathname } = useRouter()
   const user = useRecoilValue(state.userProfile)
   const links = LINKS.map((link, i, arr) => (
@@ -28,6 +29,25 @@ export default function Header() {
       isLast={i === arr.length - 1}
       {...link} />
   ));
+
+  const memberMenuBtn = (
+    <Button
+      onClick={() => setShowNavPopover(true)}
+      className="flex justify-end h-full px-2 border-b-4 border-transparent focus:shadow-none"
+      kind="clear">
+      {user && <UserAvatar avatarId={user.avatar} className="mr-3 md:mx-0" />}
+      <div className="hidden md:inline ml-3 mx-2 text-indigo-400 text-right text-xs font-bold">{user && user.fullname}</div>
+      <svg
+        width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+        className={classNames('transform transition-transform duration-100', { 'rotate-180': showNavPopover })}>
+        <path d="M6.34317 7.75732L4.92896 9.17154L12 16.2426L19.0711 9.17157L17.6569 7.75735L12 13.4142L6.34317 7.75732Z" fill="currentColor" />
+      </svg>
+    </Button>
+  )
+
+  const guestMenuBtn = (
+    <Button onClick={() => setDisplayAuthModal(true)} className="h-full">Join us</Button>
+  )
 
   return (
     <header className="fixed top-0 w-full bg-white shadow-sm">
@@ -41,19 +61,8 @@ export default function Header() {
         <nav className="hidden md:flex list-none">
           {links}
         </nav>
-        <div className="md:flex md:justify-end md:w-48 h-full">
-        	<Button
-        	  onClick={() => setShowNavPopover(true)}
-        	  className="flex justify-end h-full px-2 border-b-4 border-transparent focus:shadow-none"
-        	  kind="clear">
-        	  <UserAvatar avatarId={user.avatar} className="mr-3 md:mx-0" />
-        	  <div className="hidden md:inline ml-3 mx-2 text-indigo-400 text-right text-xs font-bold">{user && user.fullname}</div>
-        	  <svg
-        	    width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-        	    className={classNames('transform transition-transform duration-100', { 'rotate-180': showNavPopover })}>
-        	    <path d="M6.34317 7.75732L4.92896 9.17154L12 16.2426L19.0711 9.17157L17.6569 7.75735L12 13.4142L6.34317 7.75732Z" fill="currentColor" />
-        	  </svg>
-        	</Button>
+        <div className={classNames('md:flex md:justify-end md:w-48', user != null ? 'h-full' : 'h-10')}>
+        	{user != null ? memberMenuBtn : guestMenuBtn}
         </div>
       </div>
       {showNavPopover &&

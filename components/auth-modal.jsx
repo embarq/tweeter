@@ -3,10 +3,13 @@ import Portal from '../components/portal'
 import Modal from '../components/modal'
 import Auth from '../components/auth-page'
 
-export default function AuthModal() {
+export default function AuthModal({ onDismiss }) {
   const [display, setDisplay] = useState(true)
 
   if (!display) {
+    if (onDismiss instanceof Function) {
+      onDismiss()
+    }
     return null
   }
 

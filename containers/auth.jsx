@@ -40,6 +40,7 @@ export default function AuthContainer({children}) {
           setUserProfile(profile)
           setUserId(uid)
         } else {
+          setUserProfile(null)
           setUserId(null)
         }
       } catch (error) {
