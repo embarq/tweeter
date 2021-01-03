@@ -33,36 +33,16 @@ export default function ExplorePage({ posts }) {
 }
 
 export async function getServerSideProps(ctx) {
-  try {
-    const cookies = new Cookies(ctx.req.headers.cookie)
-    const tokenPayload = cookies.get(cookiesKey.AuthKey)
+  await verifyIdToken(null)
 
-    if ((tokenPayload || '').trim().length === 0) {
-      return {
-        props: {
-          posts: []
-        }
-      }
-    }
+  let posts = await admin.firestore()
+    .collection('posts')
+    .get()
+    .then(snap => snap.docs.map(doc => ({ ...doc.data(), id: doc.id })))
 
-    await verifyIdToken(tokenPayload)
-
-    let posts = await admin.firestore()
-      .collection('posts')
-      .get()
-      .then(snap => snap.docs.map(doc => ({ ...doc.data(), id: doc.id })))
-
-    return {
-      props: {
-        posts
-      }
-    }
-  } catch(err) {
-    console.error(err)
-    return {
-      props: {
-        posts: []
-      }
+  return {
+    props: {
+      posts
     }
   }
 }

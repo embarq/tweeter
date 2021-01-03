@@ -14,10 +14,12 @@ export const verifyIdToken = (token) => {
     })
   }
 
-  return admin
-    .auth()
-    .verifyIdToken(token)
-    .catch((error) => {
-      throw error
-    })
+  if (token) {
+    return admin
+      .auth()
+      .verifyIdToken(token)
+      .catch((error) => {
+        throw error
+      })
+  }
 }
