@@ -12,9 +12,9 @@ import UserAvatar from './user-avatar'
 
 const LINKS = [
   { link: '/', text: 'Home' },
-  { link: '/bookmarks', text: 'Bookmarks' },
   { link: '/explore', text: 'Explore' },
-  { link: '/messages', text: 'Messages' }
+  { link: '/bookmarks', text: 'Bookmarks', disabled: true },
+  { link: '/messages', text: 'Messages', disabled: true }
 ]
 
 export default function Header() {
