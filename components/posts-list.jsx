@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import Post from './post'
 
-export default function PostsList({ className, posts = [] }) {
+export default function PostsList({ className = '', posts = [] }) {
   return (
     <ul className={classNames('list-none', className)}>{
       posts.map(post => (
