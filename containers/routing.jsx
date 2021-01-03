@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import { useRecoilValue } from 'recoil'
 import AuthModal from '../components/auth-modal'
+import AppLoading from '../components/app-loading'
 import * as state from '../constants/state'
 
 const memberRoutes = [
@@ -19,13 +20,15 @@ export default function RouingContainer({ children }) {
   const userLoading = useRecoilValue(state.userLoading)
   const user = useRecoilValue(state.userId)
 
-  if (!userLoading && user == null) {
-    return <AuthModal />
+  if (!userLoading) {
+    return memberRoutes.includes(pathname) && user == null
+       ? <AuthModal />
+       : <>{children}</>
   }
 
   if (memberRoutes.includes(pathname) && !userLoading && user != null) {
     return <>{children}</>
   }
 
-  return null
+  return <AppLoading />
 }
