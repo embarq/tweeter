@@ -3,11 +3,11 @@ import { atomFactory } from '../util/misc'
 
 const createAuth = atomFactory('auth')
 
-export const userId = createAuth('uid')
+export const userId = createAuth('uid', null)
 
-export const userProfile = createAuth('userProfile', {})
+export const userProfile = createAuth('userProfile', null)
 
-export const userLoading = createAuth('userLoading', true)
+export const userLoading = createAuth('userLoading', false)
 
 export const displayAuthModal = createAuth('displayAuthModal', false)
 
